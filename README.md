@@ -2,7 +2,7 @@
 
 A clean, professional, and responsive portfolio website built with **ASP.NET Core MVC** and **Bootstrap 5**. Features dark mode by default with a toggle to switch to light mode.
 
-![Portfolio Preview](https://img.shields.io/badge/ASP.NET%20Core-8.0-purple)
+![Portfolio Preview](https://img.shields.io/badge/ASP.NET%20Core-10.0-purple)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
@@ -56,7 +56,7 @@ Portfolio/
 
 Before running this project, make sure you have:
 
-- [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) or later
+- [.NET 10.0 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) or later
 - Any code editor (Visual Studio, VS Code, or Rider)
 
 ---
