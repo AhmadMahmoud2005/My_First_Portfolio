@@ -1,0 +1,64 @@
+# ============================================================
+# .NET Core / ASP.NET Core GitIgnore
+# ============================================================
+
+# Build outputs
+bin/
+obj/
+out/
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider files
+.idea/
+*.sln.iml
+
+# VS Code files
+.vscode/
+
+# NuGet packages
+*.nupkg
+packages/
+
+# Publish outputs
+publish/
+*.publishsettings
+
+# Logs
+logs/
+*.log
+
+# Environment variables
+.env
+.env.local
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# Test results
+TestResults/
+
+# Coverage reports
+coverage/
+*.coverage
+
+# Local tool settings
+.local-tools/
+
+# Database files
+*.mdf
+*.ldf
+*.db
+
+# Sensitive configuration (uncomment if needed)
+# appsettings.Production.json

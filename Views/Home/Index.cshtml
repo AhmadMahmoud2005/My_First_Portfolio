@@ -1,0 +1,453 @@
+@* ============================================================
+   Home Page (Index.cshtml)
+   ============================================================
+   This is the main portfolio page containing all sections:
+   - Hero Section
+   - About Section
+   - Skills Section
+   - Projects Section
+   - Services Section
+   - Contact Section
+   ============================================================ *@
+
+@model HomeViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+@* ============================================================
+   HERO SECTION
+   Introduction with name, title, and call-to-action buttons
+   ============================================================ *@
+<section id="home" class="hero-section d-flex align-items-center">
+    <div class="container">
+        <div class="row align-items-center">
+            @* Left side - Text content *@
+            <div class="col-lg-8 hero-content">
+                @* Greeting *@
+                <p class="hero-greeting mb-2">Hello, I'm</p>
+                
+                @* Name *@
+                <h1 class="hero-name display-3 fw-bold mb-3">
+                    @Model.Name
+                </h1>
+                
+                @* Title with typing effect *@
+                <h2 class="hero-title h3 mb-4">
+                    <span class="text-accent">&lt;</span>@Model.Title<span class="text-accent">/&gt;</span>
+                </h2>
+                
+                @* Short intro *@
+                <p class="hero-intro lead mb-4">
+                    Passionate about building scalable web applications and learning new technologies. 
+                    Currently training to become a professional .NET developer.
+                </p>
+                
+                @* Call-to-action buttons *@
+                <div class="hero-buttons">
+                    <a href="@Model.CvUrl" target="_blank" class="btn btn-primary btn-lg me-3">
+                        <i class="bi bi-download me-2"></i>Download CV
+                    </a>
+                    <a href="#contact" class="btn btn-outline-secondary btn-lg">
+                        <i class="bi bi-envelope me-2"></i>Contact Me
+                    </a>
+                </div>
+            </div>
+            
+            @* Right side - Decorative element (optional) *@
+            <div class="col-lg-4 d-none d-lg-block text-center">
+                <div class="hero-code-block">
+                    <pre><code>
+<span class="code-keyword">class</span> <span class="code-class">Developer</span> {
+    <span class="code-keyword">string</span> Name = <span class="code-string">"Ahmad"</span>;
+    <span class="code-keyword">string</span> Passion = <span class="code-string">"Coding"</span>;
+    
+    <span class="code-keyword">void</span> <span class="code-method">BuildAwesomeApps</span>() {
+        <span class="code-comment">// Let's code!</span>
+    }
+}
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    @* Scroll down indicator *@
+    <a href="#about" class="scroll-down-indicator">
+        <i class="bi bi-chevron-down"></i>
+    </a>
+</section>
+
+@* ============================================================
+   ABOUT SECTION
+   Personal information, education, and interests
+   ============================================================ *@
+<section id="about" class="about-section py-5">
+    <div class="container">
+        @* Section header *@
+        <div class="section-header text-center mb-5">
+            <h2 class="section-title">About <span class="text-accent">Me</span></h2>
+            <div class="section-line mx-auto"></div>
+        </div>
+        
+        <div class="row align-items-center">
+            @* Profile image *@
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <div class="about-image-wrapper text-center">
+                    <div class="about-image">
+                        @* Placeholder for profile image *@
+                        <div class="profile-placeholder">
+                            <i class="bi bi-person-circle display-1"></i>
+                        </div>
+                        @* Uncomment when you have a real image:
+                        <img src="@Model.ProfileImageUrl" alt="@Model.Name" class="img-fluid rounded-circle">
+                        *@
+                    </div>
+                </div>
+            </div>
+            
+            @* About content *@
+            <div class="col-lg-8">
+                <div class="about-content">
+                    @* About text *@
+                    <p class="about-text lead mb-4">
+                        @Model.AboutText
+                    </p>
+                    
+                    @* Quick info list *@
+                    <ul class="about-list list-unstyled">
+                        @foreach (var point in Model.AboutPoints)
+                        {
+                            <li class="about-item mb-2">
+                                <i class="bi bi-check-circle-fill text-accent me-2"></i>
+                                @point
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@* ============================================================
+   SKILLS SECTION
+   Display skills organized by category with progress bars
+   ============================================================ *@
+<section id="skills" class="skills-section py-5">
+    <div class="container">
+        @* Section header *@
+        <div class="section-header text-center mb-5">
+            <h2 class="section-title">My <span class="text-accent">Skills</span></h2>
+            <div class="section-line mx-auto"></div>
+            <p class="section-subtitle mt-3">Technologies I work with</p>
+        </div>
+        
+        <div class="row">
+            @* Backend Skills *@
+            <div class="col-lg-4 mb-4">
+                <div class="skill-category h-100">
+                    <h3 class="skill-category-title">
+                        <i class="bi bi-server me-2"></i>Backend
+                    </h3>
+                    <div class="skill-list">
+                        @foreach (var skill in Model.Skills.Where(s => s.Category == "Backend"))
+                        {
+                            <div class="skill-item mb-3">
+                                <div class="skill-header d-flex justify-content-between mb-1">
+                                    <span class="skill-name">
+                                        <i class="bi @skill.IconClass me-2"></i>@skill.Name
+                                    </span>
+                                    <span class="skill-percentage">@skill.Proficiency%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: @skill.Proficiency%"
+                                         data-progress="@skill.Proficiency"></div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            
+            @* Frontend Skills *@
+            <div class="col-lg-4 mb-4">
+                <div class="skill-category h-100">
+                    <h3 class="skill-category-title">
+                        <i class="bi bi-laptop me-2"></i>Frontend
+                    </h3>
+                    <div class="skill-list">
+                        @foreach (var skill in Model.Skills.Where(s => s.Category == "Frontend"))
+                        {
+                            <div class="skill-item mb-3">
+                                <div class="skill-header d-flex justify-content-between mb-1">
+                                    <span class="skill-name">
+                                        <i class="bi @skill.IconClass me-2"></i>@skill.Name
+                                    </span>
+                                    <span class="skill-percentage">@skill.Proficiency%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: @skill.Proficiency%"
+                                         data-progress="@skill.Proficiency"></div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            
+            @* Tools *@
+            <div class="col-lg-4 mb-4">
+                <div class="skill-category h-100">
+                    <h3 class="skill-category-title">
+                        <i class="bi bi-tools me-2"></i>Tools
+                    </h3>
+                    <div class="skill-list">
+                        @foreach (var skill in Model.Skills.Where(s => s.Category == "Tools"))
+                        {
+                            <div class="skill-item mb-3">
+                                <div class="skill-header d-flex justify-content-between mb-1">
+                                    <span class="skill-name">
+                                        <i class="bi @skill.IconClass me-2"></i>@skill.Name
+                                    </span>
+                                    <span class="skill-percentage">@skill.Proficiency%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: @skill.Proficiency%"
+                                         data-progress="@skill.Proficiency"></div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@* ============================================================
+   PROJECTS SECTION
+   Showcase of portfolio projects with cards
+   ============================================================ *@
+<section id="projects" class="projects-section py-5">
+    <div class="container">
+        @* Section header *@
+        <div class="section-header text-center mb-5">
+            <h2 class="section-title">My <span class="text-accent">Projects</span></h2>
+            <div class="section-line mx-auto"></div>
+            <p class="section-subtitle mt-3">Some of my recent work</p>
+        </div>
+        
+        @* Projects grid *@
+        <div class="row">
+            @foreach (var project in Model.Projects)
+            {
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="project-card h-100">
+                        @* Project image placeholder *@
+                        <div class="project-image">
+                            <div class="project-image-placeholder">
+                                <i class="bi bi-folder-fill display-4"></i>
+                            </div>
+                            @* Uncomment when you have real images:
+                            <img src="@project.ImageUrl" alt="@project.Title" class="img-fluid">
+                            *@
+                        </div>
+                        
+                        @* Project content *@
+                        <div class="project-content p-3">
+                            <h3 class="project-title h5">@project.Title</h3>
+                            <p class="project-description">@project.Description</p>
+                            
+                            @* Technologies used *@
+                            <div class="project-tech mb-3">
+                                @foreach (var tech in project.Technologies)
+                                {
+                                    <span class="tech-badge">@tech</span>
+                                }
+                            </div>
+                            
+                            @* Project links *@
+                            <div class="project-links">
+                                <a href="@project.GitHubUrl" target="_blank" class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-github me-1"></i>GitHub
+                                </a>
+                                @if (!string.IsNullOrEmpty(project.LiveUrl))
+                                {
+                                    <a href="@project.LiveUrl" target="_blank" class="btn btn-primary btn-sm ms-2">
+                                        <i class="bi bi-box-arrow-up-right me-1"></i>Live Demo
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        
+        @* View more on GitHub *@
+        <div class="text-center mt-4">
+            <a href="@Model.GitHubUrl" target="_blank" class="btn btn-outline-secondary">
+                <i class="bi bi-github me-2"></i>View More on GitHub
+            </a>
+        </div>
+    </div>
+</section>
+
+@* ============================================================
+   SERVICES SECTION
+   Freelance services offered
+   ============================================================ *@
+<section id="services" class="services-section py-5">
+    <div class="container">
+        @* Section header *@
+        <div class="section-header text-center mb-5">
+            <h2 class="section-title">My <span class="text-accent">Services</span></h2>
+            <div class="section-line mx-auto"></div>
+            <p class="section-subtitle mt-3">What I can do for you</p>
+        </div>
+        
+        @* Services grid *@
+        <div class="row">
+            @foreach (var service in Model.Services)
+            {
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="service-card h-100 text-center p-4">
+                        @* Service icon *@
+                        <div class="service-icon mb-3">
+                            <i class="bi @service.IconClass display-4"></i>
+                        </div>
+                        
+                        @* Service title *@
+                        <h3 class="service-title h5 mb-3">@service.Title</h3>
+                        
+                        @* Service description *@
+                        <p class="service-description mb-0">@service.Description</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@* ============================================================
+   CONTACT SECTION
+   Contact form and social links
+   ============================================================ *@
+<section id="contact" class="contact-section py-5">
+    <div class="container">
+        @* Section header *@
+        <div class="section-header text-center mb-5">
+            <h2 class="section-title">Get In <span class="text-accent">Touch</span></h2>
+            <div class="section-line mx-auto"></div>
+            <p class="section-subtitle mt-3">Let's work together</p>
+        </div>
+        
+        <div class="row">
+            @* Contact info *@
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <div class="contact-info">
+                    <h3 class="h4 mb-4">Contact Information</h3>
+                    
+                    @* Email *@
+                    <div class="contact-item mb-3">
+                        <i class="bi bi-envelope-fill text-accent me-2"></i>
+                        <a href="mailto:@Model.Email">@Model.Email</a>
+                    </div>
+                    
+                    @* Social links *@
+                    <div class="contact-social mt-4">
+                        <h4 class="h6 mb-3">Follow Me</h4>
+                        <div class="social-links">
+                            <a href="@Model.GitHubUrl" target="_blank" class="social-link" aria-label="GitHub">
+                                <i class="bi bi-github"></i>
+                            </a>
+                            <a href="@Model.LinkedInUrl" target="_blank" class="social-link" aria-label="LinkedIn">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                            <a href="mailto:@Model.Email" class="social-link" aria-label="Email">
+                                <i class="bi bi-envelope-fill"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            @* Contact form *@
+            <div class="col-lg-8">
+                <div class="contact-form-wrapper">
+                    @* Success message *@
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="bi bi-check-circle-fill me-2"></i>@TempData["SuccessMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    
+                    <form asp-action="Contact" asp-controller="Home" method="post" class="contact-form">
+                        @* Anti-forgery token for security *@
+                        @Html.AntiForgeryToken()
+                        
+                        <div class="row">
+                            @* Name field *@
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="ContactForm.Name" class="form-label"></label>
+                                <input asp-for="ContactForm.Name" class="form-control" placeholder="Your Name">
+                                <span asp-validation-for="ContactForm.Name" class="text-danger"></span>
+                            </div>
+                            
+                            @* Email field *@
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="ContactForm.Email" class="form-label"></label>
+                                <input asp-for="ContactForm.Email" class="form-control" placeholder="your@email.com">
+                                <span asp-validation-for="ContactForm.Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+                        @* Message field *@
+                        <div class="mb-3">
+                            <label asp-for="ContactForm.Message" class="form-label"></label>
+                            <textarea asp-for="ContactForm.Message" class="form-control" rows="5" 
+                                      placeholder="Your message..."></textarea>
+                            <span asp-validation-for="ContactForm.Message" class="text-danger"></span>
+                        </div>
+                        
+                        @* Submit button *@
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-send me-2"></i>Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@* ============================================================
+   SCRIPTS SECTION
+   Page-specific scripts for validation and animations
+   ============================================================ *@
+@section Scripts {
+    @* jQuery validation scripts *@
+    <partial name="_ValidationScriptsPartial" />
+    
+    <script>
+        // Animate skill progress bars when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const progress = entry.target.getAttribute('data-progress');
+                        entry.target.style.width = progress + '%';
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            skillBars.forEach(bar => observer.observe(bar));
+        });
+    </script>
+}

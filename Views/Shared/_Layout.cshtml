@@ -1,0 +1,142 @@
+@* ============================================================
+   Main Layout Template (_Layout.cshtml)
+   ============================================================
+   This is the master page template that wraps all views.
+   It includes the navigation bar, footer, and common scripts.
+   ============================================================ *@
+
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    @* Meta tags for character encoding and responsive design *@
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    @* Page title - can be overridden in individual views *@
+    <title>@ViewData["Title"] - Ahmad Mahmoud | .NET Developer</title>
+    
+    @* Meta description for SEO *@
+    <meta name="description" content="Portfolio of Ahmad Mahmoud - .NET Full Stack Developer Trainee" />
+
+    @* Bootstrap 5 CSS - for responsive grid and components *@
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    @* Bootstrap Icons - for vector icons *@
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    @* Custom CSS - portfolio-specific styles *@
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    
+    @* Additional styles can be injected from views *@
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    @* ============================================================
+       NAVIGATION BAR
+       Fixed top navbar with logo and navigation links
+       ============================================================ *@
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
+        <div class="container">
+            @* Logo / Brand Name *@
+            <a class="navbar-brand fw-bold" href="#home">
+                <i class="bi bi-code-square me-2"></i>Ahmad<span class="text-accent">.</span>
+            </a>
+            
+            @* Mobile Toggle Button *@
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            @* Navigation Links *@
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    
+                    @* Dark Mode Toggle Button *@
+                    <li class="nav-item ms-lg-3">
+                        <button class="btn btn-outline-secondary btn-sm theme-toggle" id="themeToggle" 
+                                aria-label="Toggle dark mode">
+                            <i class="bi bi-moon-fill" id="themeIcon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    @* ============================================================
+       MAIN CONTENT AREA
+       This is where individual view content will be rendered
+       ============================================================ *@
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    @* ============================================================
+       FOOTER
+       Copyright and social links
+       ============================================================ *@
+    <footer class="footer py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                @* Copyright Text *@
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">
+                        &copy; @DateTime.Now.Year <strong>Ahmad Mahmoud</strong>. All Rights Reserved.
+                    </p>
+                </div>
+                
+                @* Social Links *@
+                <div class="col-md-6 text-center text-md-end">
+                    <div class="social-links">
+                        <a href="https://github.com/AhmadMahmoud2005" target="_blank" 
+                           class="social-link" aria-label="GitHub">
+                            <i class="bi bi-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/ahmad-mahmoud-medhat" target="_blank" 
+                           class="social-link" aria-label="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="mailto:ahmad.mahmoud.medhat@gmail.com" 
+                           class="social-link" aria-label="Email">
+                            <i class="bi bi-envelope-fill"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    @* ============================================================
+       SCRIPTS
+       Loaded at the end for better page performance
+       ============================================================ *@
+    
+    @* Bootstrap 5 JavaScript Bundle (includes Popper) *@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    @* Custom JavaScript - site-wide functionality *@
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    @* Additional scripts can be injected from views *@
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
